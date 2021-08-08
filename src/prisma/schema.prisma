@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Coin {
+  id     String  @id @default(uuid())
+  name   String  @unique
+  symbol String
+  tokens Token[]
+}
+
+model Token {
+  id         String    @id @default(uuid())
+  userId     String
+  quantity   Float     @default(0)
+  coin       Coin      @relation(fields: [coinId], references: [id])
+  coinId     String
+  platform   Platform? @relation(fields: [platformId], references: [id])
+  platformId String?
+}
+
+model Platform {
+  id     String  @id @default(uuid())
+  name   String  @unique
+  url    String
+  tokens Token[]
+}
