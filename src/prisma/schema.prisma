@@ -19,12 +19,13 @@ model Coin {
 
 model Token {
   id         String    @id @default(uuid())
-  userId     String
   quantity   Float     @default(0)
   coin       Coin      @relation(fields: [coinId], references: [id])
   coinId     String
   platform   Platform? @relation(fields: [platformId], references: [id])
   platformId String?
+  user       User      @relation(fields: [userId], references: [id])
+  userId     String
 }
 
 model Platform {
@@ -32,4 +33,11 @@ model Platform {
   name   String  @unique
   url    String
   tokens Token[]
+}
+
+model User {
+  id       String  @id @default(uuid())
+  email    String  @unique
+  password String
+  tokens   Token[]
 }
