@@ -4,19 +4,19 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTokenInput } from './dto/create-token.input';
 import { UpdateTokenInput } from './dto/update-token.input';
 
-const TEMPORARY_USER_ID = '1';
-
 @Injectable()
 export class TokensService {
   constructor(private prisma: PrismaService) {}
-  create(createTokenInput: CreateTokenInput) {
-    const { coinId, platformId, ...rest } = createTokenInput;
+
+  create(createTokenInput: CreateTokenInput, userId: string) {
+    const { coin, platformId, ...rest } = createTokenInput;
+
     return this.prisma.token.create({
       data: {
         ...rest,
-        coin: { connect: { id: coinId } },
+        coin,
         platform: { connect: { id: platformId } },
-        user: { connect: { id: TEMPORARY_USER_ID } },
+        userId,
       },
     });
   }

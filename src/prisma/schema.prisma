@@ -10,21 +10,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Coin {
-  id     String  @id @default(uuid())
-  name   String  @unique
-  symbol String
-  tokens Token[]
-}
-
 model Token {
   id         String    @id @default(uuid())
   quantity   Float     @default(0)
-  coin       Coin      @relation(fields: [coinId], references: [id])
-  coinId     String
+  coin       String
   platform   Platform? @relation(fields: [platformId], references: [id])
   platformId String?
-  user       User      @relation(fields: [userId], references: [id])
   userId     String
 }
 
@@ -33,11 +24,4 @@ model Platform {
   name   String  @unique
   url    String
   tokens Token[]
-}
-
-model User {
-  id       String  @id @default(uuid())
-  email    String  @unique
-  password String
-  tokens   Token[]
 }

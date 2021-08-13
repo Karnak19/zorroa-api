@@ -1,7 +1,28 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Float } from '@nestjs/graphql';
 
 @ObjectType()
-export class Coin {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+export class CoinOverview {
+  @Field()
+  id: string;
+
+  @Field()
+  symbol: string;
+
+  @Field()
+  name: string;
+}
+
+@ObjectType()
+export class Coin extends CoinOverview {
+  @Field(() => Float)
+  current_price?: number;
+
+  @Field()
+  thumb_image: string;
+
+  @Field()
+  small_image: string;
+
+  @Field()
+  large_image: string;
 }

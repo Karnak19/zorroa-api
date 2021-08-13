@@ -1,8 +1,9 @@
-import { CreateTokenInput } from './create-token.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { InputType } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 
 @InputType()
-export class UpdateTokenInput extends PartialType(CreateTokenInput) {
-  @Field()
-  id: string;
+export class UpdateTokenInput implements Prisma.TokenUpdateInput {
+  quantity?: number;
+  coin?: string;
+  userId?: string;
 }

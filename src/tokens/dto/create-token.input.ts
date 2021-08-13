@@ -1,15 +1,15 @@
-import { InputType, Field, Int } from '@nestjs/graphql';
+import { InputType, Field, Float } from '@nestjs/graphql';
 import { Prisma } from '@prisma/client';
 
 @InputType()
 export class CreateTokenInput
-  implements Omit<Prisma.TokenCreateInput, 'user' | 'coin'>
+  implements Omit<Prisma.TokenCreateInput, 'userId'>
 {
-  @Field(() => Int)
+  @Field(() => Float)
   quantity: number;
 
   @Field()
-  coinId: string;
+  coin: string;
 
   @Field(() => String, { nullable: true })
   platformId?: string;

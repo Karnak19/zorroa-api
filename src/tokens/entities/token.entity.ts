@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Float } from '@nestjs/graphql';
 import { Token as PToken } from '@prisma/client';
 
 @ObjectType()
@@ -9,11 +9,11 @@ export class Token implements PToken {
   @Field()
   userId: string;
 
-  @Field(() => Int)
+  @Field(() => Float)
   quantity: number;
 
   @Field()
-  coinId: string;
+  coin: string;
 
   @Field()
   platformId: string;
