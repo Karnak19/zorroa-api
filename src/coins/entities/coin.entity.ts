@@ -25,4 +25,16 @@ export class Coin extends CoinOverview {
 
   @Field()
   large_image: string;
+
+  @Field(() => [Price])
+  prices: Price[];
+}
+
+@ObjectType()
+class Price {
+  @Field()
+  date: number;
+
+  @Field()
+  price: number;
 }

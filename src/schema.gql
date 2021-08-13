@@ -1,0 +1,51 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CoinOverview {
+  id: String!
+  symbol: String!
+  name: String!
+}
+
+type Coin {
+  id: String!
+  symbol: String!
+  name: String!
+  current_price: Float!
+  thumb_image: String!
+  small_image: String!
+  large_image: String!
+  prices: [Price!]!
+}
+
+type Price {
+  date: Float!
+  price: Float!
+}
+
+type Token {
+  id: String!
+  userId: String!
+  quantity: Float!
+  coin: String!
+  platformId: String!
+}
+
+type Query {
+  coins: [CoinOverview!]!
+  coin(id: String!): Coin!
+  tokens: [Token!]!
+  token(id: String!): Token!
+}
+
+type Mutation {
+  createToken(createTokenInput: CreateTokenInput!): Token!
+  removeToken(id: String!): Token!
+}
+
+input CreateTokenInput {
+  quantity: Float!
+  coin: String!
+  platformId: String
+}
